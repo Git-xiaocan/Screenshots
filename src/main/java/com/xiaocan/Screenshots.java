@@ -221,6 +221,7 @@ public class Screenshots extends Application {
                Pstage.setIconified(false);
            } catch (IOException ex) {
                ex.printStackTrace();
+
            }
        });
         HBox hBox = new HBox();
