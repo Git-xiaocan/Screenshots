@@ -24,6 +24,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class Screenshots extends Application {
@@ -45,6 +47,7 @@ public class Screenshots extends Application {
     Button button = new Button("完成");
     BufferedImage image = null;
     AnchorPane anchorPane =null;
+    HBox hBox = null;
     @Override
     public void start(Stage primaryStage) {
         Pstage = primaryStage;
@@ -160,7 +163,6 @@ public class Screenshots extends Application {
                 view.setPrefHeight(height);
                 //开始截屏
 
-
             }
         });
         anchorPane.setOnMouseDragReleased(new EventHandler<MouseDragEvent>() {
@@ -168,15 +170,17 @@ public class Screenshots extends Application {
             public void handle(MouseDragEvent event) {
                 button = new Button("完成");
                 anchorPane.getChildren().add(button);
-                AnchorPane.setTopAnchor(button,event.getY()+10.0);
-                AnchorPane.setLeftAnchor(button,event.getX()-button.getWidth());
+                AnchorPane.setTopAnchor(button,event.getY()-25);
+                AnchorPane.setLeftAnchor(button,event.getX()-50);
                 button.setOnMouseClicked(e->{
                     try {
-                        image = (new Robot()).createScreenCapture(new Rectangle((int)screenX_start+2,(int)screenY_start+2,(int)width-4,(int)height-4));
                         stage.close();
+
+                        image = (new Robot()).createScreenCapture(new Rectangle((int)screenX_start,(int)screenY_start,(int)width,(int)height));
+
                         Pstage.setIconified(true);
                        showImage();
-
+//haha
 
                     } catch (AWTException ex) {
                         ex.printStackTrace();
@@ -224,7 +228,7 @@ public class Screenshots extends Application {
 
            }
        });
-        HBox hBox = new HBox();
+        hBox = new HBox();
         hBox.setPrefWidth(500);
         hBox.getChildren().add(bu);
         hBox.setAlignment(Pos.CENTER);
